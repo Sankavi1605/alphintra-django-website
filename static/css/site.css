@@ -67,9 +67,12 @@ a {
 }
 
 .brand-link {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.8rem !important;
+  width: max-content !important;
+  margin: 0 !important;
 }
 
 .brand-mark {
