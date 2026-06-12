@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Alphintra{% endblock %}</title>
     <meta name="description" content="{{ site.brand.tagline }}">
-    <link rel="stylesheet" href="{% static 'css/site.css' %}?v=7">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}?v=12">
   </head>
   <body>
     <header class="site-header">
@@ -15,15 +15,7 @@
           <img class="brand-mark" src="{{ site.brand.logo_mark }}" alt="Alphintra mark">
           <img class="brand-wordmark" src="{{ site.brand.logo_wordmark }}" alt="Alphintra">
         </a>
-        <button class="mobile-nav-btn" id="mobile-nav-btn" aria-label="Open menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-        <nav class="site-nav" id="site-nav">
-          <a href="{% url 'home' %}">Home</a>
-          <a href="{% url 'about' %}">About</a>
-          <a href="{% url 'services' %}">Services</a>
-          <a href="{% url 'socials' %}">Socials</a>
-        </nav>
+        <!-- Navigation menu removed as requested -->
       </div>
     </header>
 
