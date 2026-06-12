@@ -41,23 +41,23 @@ SITE_CONTENT = {
             "body": "The emphasis is on scalable design, secure infrastructure, long-term maintainability, and execution speed that translates into measurable outcomes."
         },
     ],
-    "service_intro": "Alphintra combines AI, web, mobile, backend, cloud, and interactive experience delivery into a single engineering partnership model.",
+    "service_intro": "Full-stack engineering across AI, web, mobile, backend, and cloud systems.",
     "services": [
         {
             "title": "Web & Mobile Applications",
-            "body": "Fast, SEO-optimized web platforms and cross-platform mobile applications built for real-world scale across startups and enterprise teams."
+            "body": "Fast, SEO-optimized web platforms and cross-platform mobile apps built for real-world scale."
         },
         {
             "title": "AI & Intelligent Systems",
-            "body": "LLM integrations, RAG architectures, automation pipelines, and AI systems that connect directly into operational workflows."
+            "body": "LLM integrations, RAG architectures, and automation pipelines that connect into operational workflows."
         },
         {
             "title": "Enterprise Backend & Cloud",
-            "body": "Scalable backend systems, microservices, secure cloud environments, observability, and data operations designed for uptime and growth."
+            "body": "Scalable backends, microservices, cloud infrastructure, and observability for uptime and growth."
         },
         {
             "title": "UI/UX & Interactive 3D",
-            "body": "High-fidelity digital experiences, design systems, and interactive 3D environments engineered for clarity, performance, and engagement."
+            "body": "High-fidelity digital experiences, design systems, and interactive 3D environments."
         },
     ],
     "process": [

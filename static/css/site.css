@@ -597,6 +597,7 @@ body:has(.home-shell) {
   }
 
   .site-nav.open {
+    display: flex;
     opacity: 1;
     pointer-events: auto;
   }
@@ -617,6 +618,10 @@ body:has(.home-shell) {
 
   .brand-mark { width: 2.6rem; }
   .brand-wordmark { width: 9rem; }
+
+  .site-nav {
+    display: none;
+  }
 
   .hero-section {
     padding: 2rem 0;
@@ -733,8 +738,8 @@ body:has(.home-shell) {
     padding: 0.8rem 0 0;
   }
 
-  .brand-mark { width: 2.2rem; }
-  .brand-wordmark { width: 7.5rem; }
+  .brand-mark { width: 3rem; }
+  .brand-wordmark { width: 10rem; }
 
   .hero-section {
     padding: 1.5rem 0;
@@ -781,8 +786,7 @@ body:has(.home-shell) {
   }
 
   .chat-image-right .chat-image {
-    width: 70%;
-    max-height: 150px;
+    display: none;
   }
 
   .slide-dots { bottom: 1rem; gap: 0.5rem; }
