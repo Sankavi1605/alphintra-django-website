@@ -19,7 +19,6 @@ body {
   background: var(--canvas);
   color: var(--ink);
   font-family: "Segoe UI", Arial, Helvetica, sans-serif;
-  overflow: hidden;
 }
 
 a {
@@ -89,6 +88,20 @@ a {
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.82);
 }
+
+.site-nav a {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.site-nav a:hover {
+  color: #fff;
+}
+
+.mobile-nav-btn {
+  display: none;
+}
+
 
 .page-shell {
   position: relative;
@@ -529,6 +542,74 @@ a {
 
 /* ── Responsive: Tablet (≤ 900px) ── */
 @media (max-width: 900px) {
+  .mobile-nav-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-nav-btn span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  .mobile-nav-btn.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .mobile-nav-btn.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-nav-btn.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .site-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background: rgba(0, 0, 0, 0.97);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .site-nav.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .site-nav a {
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    transition: color 0.2s ease;
+  }
+
+  .site-nav a:hover {
+    color: #fff;
+  }
+
   .brand-mark { width: 2.6rem; }
   .brand-wordmark { width: 9rem; }
 
@@ -624,6 +705,17 @@ a {
 
   .slide-dots { bottom: 1.5rem; }
   .chatbot-shell { width: min(20rem, calc(100% - 2rem)); }
+
+  .inner-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: 5rem;
+  }
+
+  .inner-page .content-section {
+    justify-content: flex-start;
+    padding-top: 1.5rem;
+  }
 }
 
 /* ── Responsive: Phone (≤ 480px) ── */
