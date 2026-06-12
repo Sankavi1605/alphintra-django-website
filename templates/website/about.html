@@ -1,0 +1,23 @@
+{% extends "website/base.html" %}
+
+{% block title %}About Alphintra{% endblock %}
+
+{% block content %}
+  <main class="page-shell inner-page">
+    <section class="content-section container">
+      <div class="section-heading">
+        <span class="eyebrow">About</span>
+        <h1>About Alphintra</h1>
+        <p>{{ site.brand.tagline }}</p>
+      </div>
+      <div class="card-grid card-grid-three">
+        {% for item in site.about %}
+          <article class="panel">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.body }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+{% endblock %}

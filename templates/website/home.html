@@ -1,0 +1,228 @@
+{% extends "website/base.html" %}
+
+{% block title %}Alphintra{% endblock %}
+
+{% block content %}
+ <main class="page-shell home-shell">
+   <div class="slideshow" id="slideshow">
+
+     <!-- Slide 1: Hero -->
+    <section class="slide hero-section snap-section has-image-bg active">
+       <img class="section-image" src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/64358f15-deea-498e-a822-47f65316722b.png" alt="Hero Background">
+       <div class="hero-copy container">
+         <span class="eyebrow">{{ site.hero.eyebrow }}</span>
+         <h1>{{ site.hero.title }}</h1>
+         <p class="lead">{{ site.hero.subtitle }}</p>
+         <div class="hero-actions">
+           <a class="button button-solid" href="{% url 'services' %}">Our Services</a>
+           <a class="button button-outline" href="{% url 'services' %}">View Services</a>
+           <a class="text-link" href="{% url 'socials' %}">Social Links</a>
+         </div>
+       </div>
+     </section>
+
+     <!-- Slide 2: Main Work -->
+     <section class="slide content-section snap-section has-video-bg">
+       <video class="section-video" autoplay muted loop playsinline>
+         <source src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/Asthetic.mp4" type="video/mp4">
+       </video>
+       <div class="container">
+         <div class="section-heading">
+           <span class="eyebrow">Main Work</span>
+           <h2>What Alphintra does.</h2>
+           <p>{{ site.main_work_intro }}</p>
+         </div>
+         <div class="card-grid card-grid-three">
+           {% for item in site.main_work %}
+             <article class="panel">
+               <h3>{{ item.title }}</h3>
+               <p>{{ item.body }}</p>
+             </article>
+           {% endfor %}
+         </div>
+       </div>
+     </section>
+
+     <!-- Slide 3: Services -->
+    <section class="slide content-section snap-section has-image-bg">
+      <img class="section-image" src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/61c1e846-4295-41c3-a90d-6f8a65b69701.png" alt="Background">
+       <div class="container">
+         <div class="section-heading">
+           <span class="eyebrow">Services</span>
+           <h2>What we give as a company.</h2>
+           <p>{{ site.service_intro }}</p>
+         </div>
+         <div class="card-grid card-grid-two">
+           {% for service in site.services %}
+             <article class="panel">
+               <h3>{{ service.title }}</h3>
+               <p>{{ service.body }}</p>
+             </article>
+           {% endfor %}
+         </div>
+       </div>
+     </section>
+
+     <!-- Slide 4: Social Links -->
+    <section class="slide content-section snap-section has-image-bg">
+      <img class="section-image" style="height: 80%;" src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/4d176fc1-1987-4556-be82-3b7b1543fb39.png" alt="Background">
+       <div class="container">
+         <div class="section-heading">
+           <span class="eyebrow">Social Links</span>
+           <h2>Connect with Alphintra.</h2>
+           <p>Use the official channels below for updates, messages, and company contact points.</p>
+         </div>
+         <div class="card-grid card-grid-two">
+           {% for social in social_links %}
+             <a class="panel social-card" href="{{ social.url }}" target="_blank" rel="noreferrer">
+               <h3>{{ social.label }}</h3>
+               <span>Open profile</span>
+             </a>
+           {% endfor %}
+         </div>
+       </div>
+     </section>
+
+     <!-- Slide 5: Chat & Contact -->
+     <section class="slide content-section snap-section chat-image-right">
+       <img class="chat-image" src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/2aacbbca-6861-4e59-9990-aca3107f76be.png" alt="Chat illustration">
+       <div class="container">
+         <div class="section-heading">
+           <span class="eyebrow">Chat & Contact</span>
+           <h2>Ask about our company and services.</h2>
+           <p>Use direct contact or the available company channels to ask about projects, services, or partnerships.</p>
+         </div>
+         <div class="contact-row">
+           <a class="button button-solid" href="mailto:{{ site.brand.email }}">{{ site.brand.email }}</a>
+           <a class="button button-outline" href="{% url 'socials' %}">Open Social Links</a>
+         </div>
+       </div>
+     </section>
+
+   </div>
+
+  <!-- Slideshow Navigation -->
+  <nav class="slide-dots" id="slide-dots" aria-label="Slideshow navigation"></nav>
+
+ </main>
+
+<script>
+(function () {
+  var slideshow = document.getElementById("slideshow");
+  var slides = slideshow.querySelectorAll(".slide");
+  var dotsContainer = document.getElementById("slide-dots");
+  var current = 0;
+  var animating = false;
+  var DURATION = 600;
+  var INTERVAL = 5000;
+  var timer = null;
+
+  // Build dot indicators
+  slides.forEach(function (_, i) {
+    var dot = document.createElement("button");
+    dot.className = "slide-dot" + (i === 0 ? " active" : "");
+    dot.setAttribute("aria-label", "Go to slide " + (i + 1));
+    dot.dataset.index = i;
+    dot.addEventListener("click", function () { goTo(i); resetTimer(); });
+    dotsContainer.appendChild(dot);
+  });
+
+  function updateDots() {
+    dotsContainer.querySelectorAll(".slide-dot").forEach(function (d, i) {
+      d.classList.toggle("active", i === current);
+    });
+  }
+
+  function goTo(index) {
+    if (animating || index === current || index < 0 || index >= slides.length) return;
+    animating = true;
+
+    var direction = index > current ? 1 : -1;
+    var outSlide = slides[current];
+    var inSlide = slides[index];
+
+    inSlide.style.transition = "none";
+    inSlide.style.opacity = "0";
+    inSlide.style.transform = "translateX(" + (direction * 30) + "%)";
+    inSlide.style.visibility = "visible";
+    inSlide.style.pointerEvents = "auto";
+    inSlide.offsetHeight;
+
+    outSlide.style.transition = "opacity " + DURATION + "ms ease, transform " + DURATION + "ms ease";
+    outSlide.style.opacity = "0";
+    outSlide.style.transform = "translateX(" + (-direction * 30) + "%)";
+
+    inSlide.style.transition = "opacity " + DURATION + "ms ease, transform " + DURATION + "ms ease";
+    inSlide.style.opacity = "1";
+    inSlide.style.transform = "translateX(0)";
+
+    setTimeout(function () {
+      outSlide.classList.remove("active");
+      outSlide.style.visibility = "hidden";
+      outSlide.style.pointerEvents = "none";
+      outSlide.style.transition = "none";
+      outSlide.style.transform = "";
+      outSlide.style.opacity = "";
+
+      inSlide.classList.add("active");
+      current = index;
+      updateDots();
+      animating = false;
+    }, DURATION);
+  }
+
+  function next() {
+    goTo(current + 1 >= slides.length ? 0 : current + 1);
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, INTERVAL);
+  }
+
+  // Start auto-advance
+  resetTimer();
+
+  // Keyboard navigation
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); next(); resetTimer(); }
+    if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); goTo(current - 1 < 0 ? slides.length - 1 : current - 1); resetTimer(); }
+  });
+
+  // Touch swipe support
+  var touchStartX = 0;
+  slideshow.addEventListener("touchstart", function (e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  slideshow.addEventListener("touchend", function (e) {
+    var dx = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(dx) > 50) {
+      dx < 0 ? next() : goTo(current - 1 < 0 ? slides.length - 1 : current - 1);
+      resetTimer();
+    }
+  }, { passive: true });
+
+  // Mouse wheel navigation — scroll within slide first, then advance
+  var wheelTimeout = null;
+  slideshow.addEventListener("wheel", function (e) {
+    var activeSlide = slides[current];
+    var atTop = activeSlide.scrollTop <= 0;
+    var atBottom = activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight - 2;
+
+    // If slide has scrollable content and we're not at the boundary, let it scroll
+    if (activeSlide.scrollHeight > activeSlide.clientHeight + 5) {
+      if (e.deltaY > 0 && !atBottom) return;
+      if (e.deltaY < 0 && !atTop) return;
+    }
+
+    e.preventDefault();
+    if (wheelTimeout) return;
+    wheelTimeout = setTimeout(function () { wheelTimeout = null; }, 800);
+    if (e.deltaY > 0 || e.deltaX > 0) next();
+    else goTo(current - 1 < 0 ? slides.length - 1 : current - 1);
+    resetTimer();
+  }, { passive: false });
+})();
+</script>
+ </script>
+{% endblock %}

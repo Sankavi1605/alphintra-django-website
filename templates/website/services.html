@@ -1,0 +1,23 @@
+{% extends "website/base.html" %}
+
+{% block title %}Alphintra Services{% endblock %}
+
+{% block content %}
+  <main class="page-shell inner-page">
+    <section class="content-section container">
+      <div class="section-heading">
+        <span class="eyebrow">Services</span>
+        <h1>Alphintra Services</h1>
+        <p>{{ site.service_intro }}</p>
+      </div>
+      <div class="card-grid card-grid-two">
+        {% for service in site.services %}
+          <article class="panel">
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.body }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+{% endblock %}

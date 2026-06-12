@@ -1,0 +1,23 @@
+{% extends "website/base.html" %}
+
+{% block title %}Alphintra Social Links{% endblock %}
+
+{% block content %}
+  <main class="page-shell inner-page">
+    <section class="content-section container">
+      <div class="section-heading">
+        <span class="eyebrow">Socials</span>
+        <h1>Official Social Links</h1>
+        <p>Follow Alphintra on the official company channels.</p>
+      </div>
+      <div class="card-grid">
+        {% for social in social_links %}
+          <a class="panel social-card" href="{{ social.url }}" target="_blank" rel="noreferrer">
+            <h3>{{ social.label }}</h3>
+            <span>Open profile</span>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+{% endblock %}

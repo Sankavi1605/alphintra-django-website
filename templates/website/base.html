@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Alphintra{% endblock %}</title>
+    <meta name="description" content="{{ site.brand.tagline }}">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}?v=7">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-row">
+        <a class="brand-link" href="{% url 'home' %}">
+          <img class="brand-mark" src="{{ site.brand.logo_mark }}" alt="Alphintra mark">
+          <img class="brand-wordmark" src="{{ site.brand.logo_wordmark }}" alt="Alphintra">
+        </a>
+      </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <details class="chatbot-shell">
+      <summary class="chatbot-toggle" aria-label="Open chatbot">
+        <span class="chatbot-icon">AI</span>
+      </summary>
+      <div class="chatbot-panel">
+        <div class="chatbot-header">
+          <div>
+            <p class="chatbot-label">Alphintra AI</p>
+            <strong>Online assistant</strong>
+          </div>
+        </div>
+        <div class="chatbot-thread">
+          <div class="chatbot-bubble chatbot-bubble-ai">
+            Ask about our company, services, or how to contact the team.
+          </div>
+        </div>
+        <div class="chatbot-actions">
+          <a class="button button-solid" href="mailto:{{ site.brand.email }}">Email us</a>
+          <a class="button button-outline" href="{% url 'socials' %}">Social Links</a>
+        </div>
+        <div class="chatbot-input-row">
+          <input type="text" placeholder="Ask Alphintra AI..." aria-label="Chat input" id="chatbot-input">
+          <button type="button" class="chatbot-send" id="chatbot-send">Send</button>
+        </div>
+      </div>
+    </details>
+
+    <script>
+      (function () {
+        const input = document.getElementById("chatbot-input");
+        const send = document.getElementById("chatbot-send");
+        const thread = document.querySelector(".chatbot-thread");
+
+        if (!input || !send || !thread) return;
+
+        function appendBubble(text, kind) {
+          const bubble = document.createElement("div");
+          bubble.className = "chatbot-bubble " + (kind === "user" ? "chatbot-bubble-user" : "chatbot-bubble-ai");
+          bubble.textContent = text;
+          thread.appendChild(bubble);
+          thread.scrollTop = thread.scrollHeight;
+        }
+
+        async function sendMessage() {
+          const message = input.value.trim();
+          if (!message) return;
+
+          appendBubble(message, "user");
+          input.value = "";
+          send.disabled = true;
+          send.textContent = "...";
+
+          try {
+            const response = await fetch("{% url 'chat' %}", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ message })
+            });
+            const data = await response.json();
+            appendBubble(data.answer || "I do not have a verified answer for that yet.", "ai");
+          } catch (error) {
+            appendBubble("The assistant is temporarily unavailable. Please use the direct contact options below.", "ai");
+          } finally {
+            send.disabled = false;
+            send.textContent = "Send";
+          }
+        }
+
+        send.addEventListener("click", sendMessage);
+        input.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            sendMessage();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
