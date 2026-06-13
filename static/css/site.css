@@ -138,10 +138,17 @@ body:has(.home-shell) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 6rem 0 1.5rem;
+  justify-content: flex-start;
+  padding: 8rem 0 1.5rem;
   position: relative;
   isolation: isolate;
+  overflow-y: auto;
+}
+
+.hero-section > .container,
+.content-section > .container {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .hero-copy h1,
@@ -217,9 +224,9 @@ body:has(.home-shell) {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 6rem 0 3rem;
-  overflow: hidden;
+  justify-content: flex-start;
+  padding: 8rem 0 3rem;
+  overflow-y: auto;
 }
 
 .has-video-bg,
