@@ -12,19 +12,19 @@ SITE_CONTENT = {
         "title": "Welcome To Alphintra",
         "subtitle": "We design and build AI-driven, cloud-native, production-ready systems for ambitious startups and enterprise teams.",
     },
-    "main_work_intro": "Alphintra focuses on practical engineering delivery across AI, applications, cloud systems, and modern digital products.",
+    "main_work_intro": "From AI automation to enterprise cloud platforms, Alphintra builds scalable digital products with premium interactive experiences.",
     "main_work": [
         {
-            "title": "AI Systems",
-            "body": "AI-driven applications, LLM integrations, intelligent workflows, and automation systems built for real business use."
+            "title": "Digital Marketing",
+            "body": "Strategic growth campaigns and data-driven marketing solutions designed to expand your audience and accelerate brand presence."
         },
         {
-            "title": "Web & Mobile",
-            "body": "Web platforms and mobile applications designed for performance, product clarity, and production deployment."
+            "title": "ERP & CRM Solutions",
+            "body": "Custom enterprise resource planning and customer relationship management systems built to streamline and automate your business operations."
         },
         {
-            "title": "Cloud & Backend",
-            "body": "Backend platforms, cloud infrastructure, system architecture, and scalable technical foundations for growing teams."
+            "title": "UI/UX & 3D Experiences",
+            "body": "High-fidelity digital experiences, premium user interfaces, and immersive 3D environments that captivate and engage users."
         },
     ],
     "about": [

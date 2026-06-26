@@ -89,6 +89,8 @@ def answer_question(message: str) -> str:
     )
 
 
+import urllib.request
+
 @csrf_exempt
 def chat(request):
     if request.method != "POST":
@@ -100,4 +102,25 @@ def chat(request):
         return JsonResponse({"error": "Invalid JSON."}, status=400)
 
     message = payload.get("message", "")
-    return JsonResponse({"answer": answer_question(message)})
+    session_id = payload.get("session_id", "")
+    history = payload.get("history", [])
+
+    data = json.dumps({
+        "message": message,
+        "session_id": session_id,
+        "history": history
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://chatbot-backend-452555374554.us-central1.run.app/api/v1/chat",
+        data=data,
+        headers={"Content-Type": "application/json"}
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=10) as response:
+            result = json.loads(response.read().decode("utf-8"))
+            return JsonResponse(result)
+    except Exception as e:
+        # Fallback to local rule-based response if backend is offline
+        return JsonResponse({"answer": answer_question(message)})

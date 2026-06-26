@@ -68,8 +68,10 @@
      </section>
 
      <!-- Slide 4: Social Links -->
-    <section class="slide content-section snap-section has-image-bg">
-      <img class="section-image" src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/4d176fc1-1987-4556-be82-3b7b1543fb39.png" alt="Background">
+    <section class="slide content-section snap-section has-video-bg">
+       <video class="section-video" autoplay muted loop playsinline>
+         <source src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/031182e4-b2d6-439f-b03e-28b9cda8b3fb.mp4" type="video/mp4">
+       </video>
        <div class="container">
          <div class="section-heading">
            <span class="eyebrow">Social Links</span>
@@ -89,7 +91,9 @@
 
      <!-- Slide 5: Chat & Contact -->
      <section class="slide content-section snap-section chat-image-right">
-       <img class="chat-image" src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/2aacbbca-6861-4e59-9990-aca3107f76be.png" alt="Chat illustration">
+       <video class="chat-image" autoplay muted loop playsinline>
+         <source src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/dbf2a707-69a3-47a7-a2f9-a089600fd281.mp4" type="video/mp4">
+       </video>
        <div class="container">
          <div class="section-heading">
            <span class="eyebrow">Chat & Contact</span>
@@ -207,7 +211,7 @@
   }, { passive: true });
 
   // Mouse wheel navigation — scroll within slide first, then advance
-  var wheelTimeout = null;
+  var lastScrollTime = 0;
   slideshow.addEventListener("wheel", function (e) {
     var activeSlide = slides[current];
     var atTop = activeSlide.scrollTop <= 0;
@@ -220,8 +224,10 @@
     }
 
     e.preventDefault();
-    if (animating || wheelTimeout) return;
-    wheelTimeout = setTimeout(function () { wheelTimeout = null; }, 1200);
+    var now = Date.now();
+    if (animating || now - lastScrollTime < 2000) return;
+    
+    lastScrollTime = now;
     if (e.deltaY > 0 || e.deltaX > 0) next();
     else goTo(current - 1 < 0 ? slides.length - 1 : current - 1);
     resetTimer();

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Alphintra{% endblock %}</title>
     <meta name="description" content="{{ site.brand.tagline }}">
-    <link rel="stylesheet" href="{% static 'css/site.css' %}?v=18">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}?v=20">
   </head>
   <body>
     <header class="site-header">
@@ -21,47 +21,113 @@
 
     {% block content %}{% endblock %}
 
-    <details class="chatbot-shell">
-      <summary class="chatbot-toggle" aria-label="Open chatbot">
-        <span class="chatbot-icon">AI Assistant</span>
-      </summary>
-      <div class="chatbot-panel">
-        <div class="chatbot-header">
+    <div class="chat-widget" id="chat-widget">
+      <button class="chat-trigger" id="chat-trigger" aria-label="Open AI Assistant" aria-expanded="false">
+        <span class="chat-trigger-icon">AI Assistant</span>
+      </button>
+      <div class="chat-window" id="chat-window" aria-hidden="true">
+        <div class="chat-header">
           <div>
-            <p class="chatbot-label">Alphintra AI</p>
-            <strong>Online assistant</strong>
+            <h3 class="chat-title">Alphintra AI</h3>
+            <p class="chat-subtitle">Engineering Assistant</p>
+          </div>
+          <button class="chat-close" id="chat-close" aria-label="Close chat">×</button>
+        </div>
+        <div class="chat-thread" id="chat-thread">
+          <div class="chat-bubble chat-bubble-ai">
+            Hi. I can help you navigate our services, company profile, or connect you with the engineering team.
           </div>
         </div>
-        <div class="chatbot-thread">
-          <div class="chatbot-bubble chatbot-bubble-ai">
-            Ask about our company, services, or how to contact the team.
-          </div>
-        </div>
-        <div class="chatbot-actions">
-          <a class="button button-solid" href="mailto:{{ site.brand.email }}">Email us</a>
-          <a class="button button-outline" href="{% url 'socials' %}">Social Links</a>
-        </div>
-        <div class="chatbot-input-row">
-          <input type="text" placeholder="Ask Alphintra AI..." aria-label="Chat input" id="chatbot-input">
-          <button type="button" class="chatbot-send" id="chatbot-send">Send</button>
+        <div class="chat-input-area">
+          <input type="text" placeholder="Ask a question..." aria-label="Chat input" id="chat-input">
+          <button type="button" class="chat-send" id="chat-send" aria-label="Send message">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
         </div>
       </div>
-    </details>
+    </div>
 
     <script>
       (function () {
-        const input = document.getElementById("chatbot-input");
-        const send = document.getElementById("chatbot-send");
-        const thread = document.querySelector(".chatbot-thread");
+        const widget = document.getElementById("chat-widget");
+        const trigger = document.getElementById("chat-trigger");
+        const closeBtn = document.getElementById("chat-close");
+        const input = document.getElementById("chat-input");
+        const send = document.getElementById("chat-send");
+        const thread = document.getElementById("chat-thread");
 
-        if (!input || !send || !thread) return;
+        if (!widget || !input || !send || !thread) return;
 
-        function appendBubble(text, kind) {
+        // Session Management
+        function getOrInitializeSession() {
+          let sid = sessionStorage.getItem("chatbot_session_id");
+          if (!sid) {
+            sid = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+              (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            );
+            sessionStorage.setItem("chatbot_session_id", sid);
+          }
+          return sid;
+        }
+
+        const sessionId = getOrInitializeSession();
+        let conversationHistory = [];
+
+        function toggleChat() {
+          const isOpen = widget.classList.contains("is-open");
+          if (isOpen) {
+            widget.classList.remove("is-open");
+            trigger.setAttribute("aria-expanded", "false");
+            document.getElementById("chat-window").setAttribute("aria-hidden", "true");
+          } else {
+            widget.classList.add("is-open");
+            trigger.setAttribute("aria-expanded", "true");
+            document.getElementById("chat-window").setAttribute("aria-hidden", "false");
+            setTimeout(() => input.focus(), 100);
+          }
+        }
+
+        trigger.addEventListener("click", toggleChat);
+        closeBtn.addEventListener("click", toggleChat);
+
+        function appendBubble(text, kind, sources = null) {
           const bubble = document.createElement("div");
-          bubble.className = "chatbot-bubble " + (kind === "user" ? "chatbot-bubble-user" : "chatbot-bubble-ai");
+          bubble.className = "chat-bubble " + (kind === "user" ? "chat-bubble-user" : "chat-bubble-ai");
           bubble.textContent = text;
+          
+          if (sources && sources.length > 0) {
+            const badges = document.createElement("div");
+            badges.style.marginTop = "6px";
+            badges.style.display = "flex";
+            badges.style.gap = "4px";
+            badges.style.flexWrap = "wrap";
+            sources.forEach(src => {
+              const badge = document.createElement("span");
+              badge.style.background = "rgba(255, 255, 255, 0.1)";
+              badge.style.padding = "2px 6px";
+              badge.style.borderRadius = "4px";
+              badge.style.fontSize = "11px";
+              badge.style.color = "#9ca3af";
+              badge.textContent = `📚 ${src}`;
+              badges.appendChild(badge);
+            });
+            bubble.appendChild(badges);
+          }
+
           thread.appendChild(bubble);
           thread.scrollTop = thread.scrollHeight;
+          return bubble;
+        }
+
+        function appendTypingIndicator() {
+          const bubble = document.createElement("div");
+          bubble.className = "chat-bubble chat-bubble-ai";
+          bubble.textContent = "● ● ●";
+          bubble.style.letterSpacing = "2px";
+          bubble.style.opacity = "0.7";
+          thread.appendChild(bubble);
+          thread.scrollTop = thread.scrollHeight;
+          return bubble;
         }
 
         async function sendMessage() {
@@ -71,21 +137,32 @@
           appendBubble(message, "user");
           input.value = "";
           send.disabled = true;
-          send.textContent = "...";
+          
+          const typingIndicator = appendTypingIndicator();
+          const historyPayload = conversationHistory.slice(-10);
 
           try {
             const response = await fetch("{% url 'chat' %}", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ message })
+              body: JSON.stringify({ 
+                message: message,
+                session_id: sessionId,
+                history: historyPayload
+              })
             });
             const data = await response.json();
-            appendBubble(data.answer || "I do not have a verified answer for that yet.", "ai");
+            typingIndicator.remove();
+            
+            appendBubble(data.answer || "I do not have a verified answer for that yet.", "ai", data.sources);
+            
+            conversationHistory.push({ role: "user", content: message });
+            conversationHistory.push({ role: "assistant", content: data.answer });
           } catch (error) {
-            appendBubble("The assistant is temporarily unavailable. Please use the direct contact options below.", "ai");
+            typingIndicator.remove();
+            appendBubble("The assistant is temporarily unavailable. Please email us directly.", "ai");
           } finally {
             send.disabled = false;
-            send.textContent = "Send";
           }
         }
 
