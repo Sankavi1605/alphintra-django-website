@@ -7,16 +7,18 @@
    <div class="slideshow" id="slideshow">
 
      <!-- Slide 1: Hero -->
-    <section class="slide hero-section snap-section has-image-bg active">
-       <img class="section-image" src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/64358f15-deea-498e-a822-47f65316722b.png" alt="Hero Background">
+    <section class="slide hero-section snap-section has-video-bg active">
+       <video class="section-video" autoplay muted loop playsinline>
+         <source src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/664acadd-3a0e-441c-b26a-020f848c0da1.mp4" type="video/mp4">
+       </video>
        <div class="hero-copy container">
          <span class="eyebrow">{{ site.hero.eyebrow }}</span>
          <h1>{{ site.hero.title }}</h1>
          <p class="lead">{{ site.hero.subtitle }}</p>
          <div class="hero-actions">
-           <button type="button" class="button button-solid slide-nav-btn" data-slide="2">Our Services</button>
-           <button type="button" class="button button-outline slide-nav-btn" data-slide="1">View Services</button>
-           <button type="button" class="text-link slide-nav-btn" data-slide="3" style="background:none;border:none;padding:0;cursor:pointer;">Social Links</button>
+           <button type="button" class="button button-solid slide-nav-btn" data-slide="2">Explore Services</button>
+           <button type="button" class="button button-outline slide-nav-btn" data-slide="1">See Our Work</button>
+           <button type="button" class="text-link slide-nav-btn" data-slide="4" style="background:none;border:none;padding:0;cursor:pointer;">Contact the Team</button>
          </div>
        </div>
      </section>
@@ -44,8 +46,10 @@
      </section>
 
      <!-- Slide 3: Services -->
-    <section class="slide content-section snap-section has-image-bg">
-      <img class="section-image" src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/61c1e846-4295-41c3-a90d-6f8a65b69701.png" alt="Background">
+    <section class="slide content-section snap-section has-video-bg">
+       <video class="section-video" autoplay muted loop playsinline>
+         <source src="https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/168b007e-2cde-48fe-a9df-2d7d9a75082a.mp4" type="video/mp4">
+       </video>
        <div class="container">
          <div class="section-heading">
            <span class="eyebrow">Services</span>
@@ -216,8 +220,8 @@
     }
 
     e.preventDefault();
-    if (wheelTimeout) return;
-    wheelTimeout = setTimeout(function () { wheelTimeout = null; }, 800);
+    if (animating || wheelTimeout) return;
+    wheelTimeout = setTimeout(function () { wheelTimeout = null; }, 1200);
     if (e.deltaY > 0 || e.deltaX > 0) next();
     else goTo(current - 1 < 0 ? slides.length - 1 : current - 1);
     resetTimer();

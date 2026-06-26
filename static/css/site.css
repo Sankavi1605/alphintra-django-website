@@ -159,6 +159,10 @@ body:has(.home-shell) {
   letter-spacing: 0.03em;
   line-height: 0.9;
   text-transform: uppercase;
+  background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero-copy h1 {
@@ -320,6 +324,13 @@ body:has(.home-shell) {
   background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
   padding: 1.5rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease;
+}
+
+.panel:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .panel h3 {
@@ -367,8 +378,8 @@ body:has(.home-shell) {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.5rem;
-  min-width: 3.5rem;
+  width: max-content;
+  padding: 0 1.5rem;
   min-height: 3.5rem;
   margin-left: auto;
   border: 1px solid var(--line);
@@ -388,6 +399,10 @@ body:has(.home-shell) {
 
 .chatbot-toggle::-webkit-details-marker {
   display: none;
+}
+
+.chatbot-shell[open] .chatbot-panel {
+  animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .chatbot-panel {
