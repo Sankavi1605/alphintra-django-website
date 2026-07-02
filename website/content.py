@@ -23,8 +23,8 @@ SITE_CONTENT = {
             "body": "Custom enterprise resource planning and customer relationship management systems built to streamline and automate your business operations."
         },
         {
-            "title": "UI/UX & 3D Experiences",
-            "body": "High-fidelity digital experiences, premium user interfaces, and immersive 3D environments that captivate and engage users."
+            "title": "Extended IT Teams",
+            "body": "Dedicated product squads and IT services that scale seamlessly alongside your company, providing expert technical execution for startups and enterprises."
         },
     ],
     "about": [

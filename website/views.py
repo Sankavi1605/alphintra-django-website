@@ -118,9 +118,9 @@ def chat(request):
     )
 
     try:
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with urllib.request.urlopen(req, timeout=30) as response:
             result = json.loads(response.read().decode("utf-8"))
             return JsonResponse(result)
     except Exception as e:
-        # Fallback to local rule-based response if backend is offline
+        # Fallback to local rule-based response if backend is offline or times out
         return JsonResponse({"answer": answer_question(message)})
