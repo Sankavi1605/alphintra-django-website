@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ll0osu+*3yrv9pi&b^d2fqfo()%f$6n5bhis7!9+6h#brl(^ai
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['alphintra-django-website.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['alphintra-django-website.vercel.app', 'localhost', '127.0.0.1', '.alphintra.com']
 
 
 # Application definition
