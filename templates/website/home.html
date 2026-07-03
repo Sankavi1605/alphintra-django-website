@@ -148,6 +148,13 @@
     var direction = index > current ? 1 : -1;
     var outSlide = slides[current];
     var inSlide = slides[index];
+    
+    // Instantly reset the incoming slide's video to 0 before it even starts animating in
+    var video = inSlide.querySelector("video");
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(function(e){});
+    }
 
     inSlide.style.transition = "none";
     inSlide.style.opacity = "0";

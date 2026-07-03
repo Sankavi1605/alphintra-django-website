@@ -210,5 +210,14 @@
         });
       })();
     </script>
+    <script>
+      // Slow down all background videos to 80% speed
+      (function () {
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => {
+          video.playbackRate = 0.8;
+        });
+      })();
+    </script>
   </body>
 </html>
