@@ -100,7 +100,7 @@ TEAM_MEMBERS = [
         "name": "Member 1",
         "role": "Founder & CEO",
         "bio": "Placeholder bio for the first team member. This text will be replaced once you provide the real details.",
-        "image_url": "https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/64358f15-deea-498e-a822-47f65316722b.png"
+        "image_url": "https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/me.jpg"
     },
     {
         "id": 2,
