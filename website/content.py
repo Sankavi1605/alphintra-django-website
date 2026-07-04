@@ -99,28 +99,28 @@ TEAM_MEMBERS = [
         "id": 1,
         "name": "Member 1",
         "role": "Founder & CEO",
-        "bio": "Placeholder bio for the first team member. This text will be replaced once you provide the real details.",
+        "bio": "A visionary leader with over a decade of experience in building scalable technology companies. Drives the strategic direction of Alphintra, focusing on product innovation, enterprise cloud architecture, and fostering a culture of engineering excellence.",
         "image_url": "https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/me.jpg"
     },
     {
         "id": 2,
         "name": "Member 2",
         "role": "Chief Technology Officer",
-        "bio": "Placeholder bio for the second team member. This text will be replaced once you provide the real details.",
+        "bio": "An expert in AI automation and backend infrastructure. Leads the technical engineering teams, ensuring every product is built with robust security protocols, high availability, and cutting-edge RAG implementations.",
         "image_url": "https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/61c1e846-4295-41c3-a90d-6f8a65b69701.png"
     },
     {
         "id": 3,
         "name": "Member 3",
         "role": "Lead Engineer",
-        "bio": "Placeholder bio for the third team member. This text will be replaced once you provide the real details.",
+        "bio": "Specializes in full-stack web and mobile application development. Passionate about clean code, performance optimization, and creating seamless cross-platform experiences for global enterprise clients.",
         "image_url": "https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/64358f15-deea-498e-a822-47f65316722b.png"
     },
     {
         "id": 4,
         "name": "Member 4",
         "role": "Head of Design",
-        "bio": "Placeholder bio for the fourth team member. This text will be replaced once you provide the real details.",
+        "bio": "Directs the visual identity and user experience across all digital products. Blends high-fidelity 3D interactions with intuitive UI design to deliver premium, award-winning interfaces that captivate users.",
         "image_url": "https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/61c1e846-4295-41c3-a90d-6f8a65b69701.png"
     }
 ]
