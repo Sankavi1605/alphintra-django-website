@@ -15,16 +15,16 @@ SITE_CONTENT = {
     "main_work_intro": "From AI automation to enterprise cloud platforms, Alphintra builds scalable digital products with premium interactive experiences.",
     "main_work": [
         {
-            "title": "Digital Marketing",
-            "body": "Strategic growth campaigns and data-driven marketing solutions designed to expand your audience and accelerate brand presence."
+            "title": "Software Engineering",
+            "body": "Full-stack development of scalable web, mobile, and custom AI-integrated platforms designed for high performance."
         },
         {
-            "title": "ERP & CRM Solutions",
-            "body": "Custom enterprise resource planning and customer relationship management systems built to streamline and automate your business operations."
+            "title": "Cybersecurity & Privacy",
+            "body": "Advanced security protocols, penetration testing, and data privacy compliance to protect your enterprise assets."
         },
         {
-            "title": "Extended IT Teams",
-            "body": "Dedicated product squads and IT services that scale seamlessly alongside your company, providing expert technical execution for startups and enterprises."
+            "title": "Cloud Infrastructure",
+            "body": "Reliable cloud deployments, DevOps automation, and serverless architectures built for massive scale and uptime."
         },
     ],
     "about": [
@@ -92,4 +92,35 @@ SOCIAL_LINKS = [
     {"label": "X / Twitter", "url": "https://x.com/alphintra_ai"},
     {"label": "Instagram", "url": "https://instagram.com/alphintra"},
     {"label": "Facebook", "url": "https://web.facebook.com/profile.php?id=61589295980353"},
+]
+
+TEAM_MEMBERS = [
+    {
+        "id": 1,
+        "name": "Member 1",
+        "role": "Founder & CEO",
+        "bio": "Placeholder bio for the first team member. This text will be replaced once you provide the real details.",
+        "image_url": "https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/64358f15-deea-498e-a822-47f65316722b.png"
+    },
+    {
+        "id": 2,
+        "name": "Member 2",
+        "role": "Chief Technology Officer",
+        "bio": "Placeholder bio for the second team member. This text will be replaced once you provide the real details.",
+        "image_url": "https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/61c1e846-4295-41c3-a90d-6f8a65b69701.png"
+    },
+    {
+        "id": 3,
+        "name": "Member 3",
+        "role": "Lead Engineer",
+        "bio": "Placeholder bio for the third team member. This text will be replaced once you provide the real details.",
+        "image_url": "https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/64358f15-deea-498e-a822-47f65316722b.png"
+    },
+    {
+        "id": 4,
+        "name": "Member 4",
+        "role": "Head of Design",
+        "bio": "Placeholder bio for the fourth team member. This text will be replaced once you provide the real details.",
+        "image_url": "https://pub-04643188b78b434d8c44735a34b1fe23.r2.dev/61c1e846-4295-41c3-a90d-6f8a65b69701.png"
+    }
 ]
